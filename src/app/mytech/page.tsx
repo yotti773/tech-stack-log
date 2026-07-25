@@ -4,10 +4,16 @@ import { AddTechForm } from "./add-tech-form";
 import { TechRow } from "./tech-row";
 
 export default async function MyTechPage() {
-  const supabase = await createClient();
-  const claims = (await supabase.auth.getClaims()).data?.claims;
+  const supabaseConfigured =
+    !!process.env.NEXT_PUBLIC_SUPABASE_URL &&
+    !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-  if (!claims) {
+  const supabase = supabaseConfigured ? await createClient() : null;
+  const claims = supabase
+    ? (await supabase.auth.getClaims()).data?.claims
+    : null;
+
+  if (!supabase || !claims) {
     return (
       <div className="flex flex-1 flex-col items-center bg-zinc-50 font-sans dark:bg-black">
         <main className="flex w-full max-w-xl flex-col items-center gap-4 px-8 py-32 text-center">
