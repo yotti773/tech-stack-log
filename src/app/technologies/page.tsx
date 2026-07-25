@@ -27,7 +27,7 @@ export default async function TechnologiesPage() {
   return (
     <div className="flex flex-1 flex-col items-center bg-bg">
       <main className="flex w-full max-w-2xl flex-col gap-8 px-8 py-16">
-        <h1 className="text-2xl font-bold tracking-tight text-text">
+        <h1 className="font-display text-3xl tracking-wide text-text">
           技術マスタ
         </h1>
         <p className="text-sm text-dim">
@@ -35,15 +35,15 @@ export default async function TechnologiesPage() {
         </p>
 
         {error && (
-          <p className="text-red-600">データの取得に失敗しました: {error.message}</p>
+          <p className="text-bad">データの取得に失敗しました: {error.message}</p>
         )}
 
         {[...grouped.entries()].map(([category, items]) => (
           <section key={category}>
-            <h2 className="mb-2 text-xs font-semibold uppercase tracking-wide text-dim">
+            <h2 className="mb-2 text-xs uppercase tracking-wide text-dim before:content-['//_']">
               {category}
             </h2>
-            <ul className="overflow-hidden rounded-lg border border-border bg-surface">
+            <ul className="overflow-hidden border border-border bg-surface">
               {items.map((tech) => (
                 <li
                   key={tech.id}
@@ -54,7 +54,7 @@ export default async function TechnologiesPage() {
                       href={tech.official_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-medium text-text underline decoration-border underline-offset-2"
+                      className="font-medium text-text underline decoration-border underline-offset-2 hover:text-accent hover:decoration-accent"
                     >
                       {tech.name}
                     </a>

@@ -48,7 +48,7 @@ export function TechRow({
           step={0.5}
           placeholder="年数"
           defaultValue={years ?? ""}
-          className="w-16 rounded-md border border-border bg-bg px-2 py-1 text-sm text-text"
+          className="w-16 border border-border bg-bg px-2 py-1 text-sm text-text"
         />
 
         <input
@@ -56,7 +56,7 @@ export function TechRow({
           name="note"
           placeholder="メモ"
           defaultValue={note ?? ""}
-          className="min-w-32 flex-1 rounded-md border border-border bg-bg px-2 py-1 text-sm text-text"
+          className="min-w-32 flex-1 border border-border bg-bg px-2 py-1 text-sm text-text"
         />
 
         <label className="flex items-center gap-1.5 text-sm text-dim">
@@ -64,11 +64,7 @@ export function TechRow({
           公開
         </label>
 
-        <button
-          type="submit"
-          disabled={pending}
-          className="rounded-md border border-border px-3 py-1 text-sm font-medium text-text disabled:opacity-50"
-        >
+        <button type="submit" disabled={pending} className="btn-term px-3 py-1 text-sm">
           保存
         </button>
       </form>
@@ -76,7 +72,7 @@ export function TechRow({
       <div className="flex items-center justify-end">
         <form action={deleteUserTechnology}>
           <input type="hidden" name="id" value={id} />
-          <button type="submit" className="text-xs text-red-600 underline">
+          <button type="submit" className="text-xs text-bad underline">
             削除
           </button>
         </form>
@@ -86,7 +82,7 @@ export function TechRow({
         <p
           className={
             state.status === "error"
-              ? "text-sm text-red-600"
+              ? "text-sm text-bad"
               : "text-sm text-good"
           }
         >

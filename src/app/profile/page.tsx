@@ -17,10 +17,7 @@ export default async function ProfilePage() {
       <div className="flex flex-1 flex-col items-center bg-bg">
         <main className="flex w-full max-w-xl flex-col items-center gap-4 px-8 py-32 text-center">
           <p className="text-text">この機能を使うにはログインが必要です。</p>
-          <Link
-            href="/login"
-            className="rounded-md bg-accent px-3 py-1.5 text-sm font-semibold text-accent-fg"
-          >
+          <Link href="/login" className="btn-term px-3 py-1.5 text-sm font-semibold">
             ログイン
           </Link>
         </main>
@@ -37,7 +34,7 @@ export default async function ProfilePage() {
   return (
     <div className="flex flex-1 flex-col items-center bg-bg">
       <main className="flex w-full max-w-lg flex-col gap-8 px-8 py-16">
-        <h1 className="text-2xl font-bold tracking-tight text-text">
+        <h1 className="font-display text-3xl tracking-wide text-text">
           プロフィール編集
         </h1>
         <ProfileForm

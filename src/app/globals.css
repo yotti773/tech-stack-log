@@ -1,15 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --color-bg: #f5f2ec;
-  --color-surface: #ffffff;
-  --color-border: #e5ddcd;
-  --color-text: #211d18;
-  --color-dim: #77705f;
-  --color-accent: #bd5a29;
-  --color-accent-fg: #ffffff;
-  --color-good: #3f7d54;
-  --color-good-bg: #e4efe6;
+  --color-bg: #061912;
+  --color-surface: #0a2117;
+  --color-border: #1f4a35;
+  --color-text: #5ffa9d;
+  --color-dim: #5f8973;
+  --color-accent: #baffdb;
+  --color-accent-fg: #04140d;
+  --color-good: #5ffa9d;
+  --color-good-bg: #123424;
+  --color-bad: #ffb627;
+  --color-bad-bg: #3a2a10;
 }
 
 @theme inline {
@@ -22,22 +24,120 @@
   --color-accent-fg: var(--color-accent-fg);
   --color-good: var(--color-good);
   --color-good-bg: var(--color-good-bg);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bad: var(--color-bad);
+  --color-bad-bg: var(--color-bad-bg);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-body);
+  --font-display: var(--font-display);
+}
+
+html {
+  background: var(--color-bg);
 }
 
 body {
-  background: var(--color-bg);
+  background:
+    radial-gradient(ellipse at 50% 0%, #0d2c1e 0%, var(--color-bg) 55%, #030f0a 100%);
   color: var(--color-text);
-  font-family: var(--font-sans), system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-family: var(--font-body), ui-monospace, "SFMono-Regular", Menlo, monospace;
+  position: relative;
+  min-height: 100%;
 }
 
-/* 習熟度(1〜5)をドットで選ぶコントロール。ラジオボタンを逆順に並べ、
-   :checked ~ label で「選んだ点までを塗る」という、星評価と同じCSSの仕組みを使う */
+/* CRT特有の質感（走査線・画面湾曲のビネット・微弱なフリッカー）を
+   body全体に固定オーバーレイとして重ねる。文字の可読性を妨げないよう
+   透明度は低めに抑える */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0px,
+    rgba(0, 0, 0, 0) 2px,
+    rgba(0, 0, 0, 0.22) 3px
+  );
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 50;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 60%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+  pointer-events: none;
+  z-index: 51;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  body {
+    animation: crt-flicker 6s infinite;
+  }
+}
+
+@keyframes crt-flicker {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  92% {
+    filter: brightness(1);
+  }
+  93% {
+    filter: brightness(0.97);
+  }
+  94% {
+    filter: brightness(1.02);
+  }
+  95% {
+    filter: brightness(1);
+  }
+}
+
+h1 {
+  text-shadow: 0 0 10px rgba(95, 250, 157, 0.4);
+  text-wrap: balance;
+}
+
+.font-display {
+  font-family: var(--font-display), ui-monospace, monospace;
+}
+
+/* 端末風の枠線ボタン。通常時は縁取りのみ、ホバー/フォーカス時に
+   アクセントカラーで塗りつぶして反転させる（ターミナルの選択表示の見た目） */
+.btn-term {
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+  background: transparent;
+  cursor: pointer;
+  transition: background-color 0.12s, color 0.12s;
+}
+
+.btn-term:hover:not(:disabled),
+.btn-term:focus-visible {
+  background: var(--color-accent);
+  color: var(--color-accent-fg);
+  outline: none;
+}
+
+.btn-term:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 習熟度(1〜5)を信号メーター風のブロックで選ぶコントロール。
+   ラジオボタンを逆順に並べ、:checked ~ label で「選んだ点までを塗る」という
+   星評価と同じCSSの仕組みを、被写体(CRT端末)に合わせてブロック表示に変えたもの */
 .level-picker {
   display: flex;
   flex-direction: row-reverse;
-  gap: 4px;
+  gap: 3px;
 }
 
 .level-picker input {
@@ -47,11 +147,10 @@ body {
 }
 
 .level-picker label {
-  width: 16px;
-  height: 16px;
-  border-radius: 9999px;
+  width: 9px;
+  height: 14px;
   border: 1px solid var(--color-border);
-  background: var(--color-bg);
+  background: transparent;
   cursor: pointer;
 }
 
@@ -60,4 +159,5 @@ body {
 .level-picker label:hover ~ label {
   background: var(--color-accent);
   border-color: var(--color-accent);
+  box-shadow: 0 0 5px var(--color-accent);
 }

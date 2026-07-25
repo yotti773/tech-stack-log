@@ -24,7 +24,7 @@ export function ProfileForm({
   return (
     <form
       action={formAction}
-      className="flex flex-col gap-4 rounded-lg border border-border bg-surface p-6"
+      className="flex flex-col gap-4 border border-border bg-surface p-6"
     >
       <label className="flex flex-col gap-1 text-sm text-text">
         ユーザー名
@@ -33,7 +33,7 @@ export function ProfileForm({
           name="username"
           defaultValue={username}
           placeholder="例: techstacklog"
-          className="rounded-md border border-border bg-bg px-2 py-1.5 text-text"
+          className="border border-border bg-bg px-2 py-1.5 text-text"
         />
       </label>
 
@@ -43,7 +43,7 @@ export function ProfileForm({
           type="text"
           name="display_name"
           defaultValue={displayName}
-          className="rounded-md border border-border bg-bg px-2 py-1.5 text-text"
+          className="border border-border bg-bg px-2 py-1.5 text-text"
         />
       </label>
 
@@ -53,7 +53,7 @@ export function ProfileForm({
           name="bio"
           defaultValue={bio}
           rows={4}
-          className="rounded-md border border-border bg-bg px-2 py-1.5 text-text"
+          className="border border-border bg-bg px-2 py-1.5 text-text"
         />
       </label>
 
@@ -65,7 +65,7 @@ export function ProfileForm({
       <button
         type="submit"
         disabled={pending}
-        className="rounded-md bg-accent px-3 py-2 font-semibold text-accent-fg disabled:opacity-50"
+        className="btn-term px-3 py-2 font-semibold"
       >
         {pending ? "保存中..." : "保存する"}
       </button>
@@ -74,7 +74,7 @@ export function ProfileForm({
         <p
           className={
             state.status === "error"
-              ? "text-sm text-red-600"
+              ? "text-sm text-bad"
               : "text-sm text-good"
           }
         >

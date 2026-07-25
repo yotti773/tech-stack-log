@@ -17,12 +17,12 @@ export function LoginForm({ confirmError }: { confirmError?: string }) {
           name="email"
           placeholder="you@example.com"
           required
-          className="w-full rounded-md border border-border bg-surface px-3 py-2 text-text"
+          className="w-full border border-border bg-surface px-3 py-2 text-text"
         />
         <button
           type="submit"
           disabled={pending}
-          className="w-full rounded-md bg-accent px-3 py-2 font-semibold text-accent-fg disabled:opacity-50"
+          className="btn-term w-full px-3 py-2 font-semibold"
         >
           {pending ? "送信中..." : "ログインリンクを送る"}
         </button>
@@ -32,7 +32,7 @@ export function LoginForm({ confirmError }: { confirmError?: string }) {
         <p
           className={
             state.status === "error"
-              ? "text-sm text-red-600"
+              ? "text-sm text-bad"
               : "text-sm text-good"
           }
         >

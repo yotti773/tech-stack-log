@@ -1,17 +1,19 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { VT323, IBM_Plex_Mono } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
 import { createClient } from "@/lib/supabase/server";
 import { logout } from "@/app/logout/actions";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const vt323 = VT323({
+  variable: "--font-display",
+  weight: "400",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const plexMono = IBM_Plex_Mono({
+  variable: "--font-body",
+  weight: ["400", "500", "600"],
   subsets: ["latin"],
 });
 
@@ -35,18 +37,18 @@ async function Header() {
   return (
     <header className="flex items-center justify-between border-b border-border bg-surface px-6 py-3 text-sm">
       <div className="flex items-center gap-5">
-        <Link href="/" className="font-bold tracking-tight text-text">
-          Tech Stack Log
+        <Link href="/" className="font-display text-lg tracking-wide text-text">
+          Tech Stack Log_
         </Link>
-        <Link href="/technologies" className="text-dim hover:text-text">
+        <Link href="/technologies" className="text-dim hover:text-accent">
           技術マスタ
         </Link>
         {email && (
           <>
-            <Link href="/mytech" className="text-dim hover:text-text">
+            <Link href="/mytech" className="text-dim hover:text-accent">
               マイ技術スタック
             </Link>
-            <Link href="/profile" className="text-dim hover:text-text">
+            <Link href="/profile" className="text-dim hover:text-accent">
               プロフィール
             </Link>
           </>
@@ -57,7 +59,7 @@ async function Header() {
         {email ? (
           <>
             <span className="flex items-center gap-2 text-dim">
-              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-accent text-xs font-bold text-accent-fg">
+              <span className="flex h-6 w-6 items-center justify-center border border-accent text-xs font-bold text-accent">
                 {initial}
               </span>
               {email}
@@ -65,17 +67,14 @@ async function Header() {
             <form action={logout}>
               <button
                 type="submit"
-                className="rounded-md border border-border px-3 py-1.5 text-text hover:bg-bg"
+                className="border border-border px-3 py-1.5 text-dim hover:border-accent hover:text-accent"
               >
                 ログアウト
               </button>
             </form>
           </>
         ) : (
-          <Link
-            href="/login"
-            className="rounded-md bg-accent px-3 py-1.5 font-semibold text-accent-fg"
-          >
+          <Link href="/login" className="btn-term px-3 py-1.5 font-semibold">
             ログイン
           </Link>
         )}
@@ -92,7 +91,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${vt323.variable} ${plexMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <Header />
