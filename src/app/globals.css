@@ -161,3 +161,23 @@ h1 {
   border-color: var(--color-accent);
   box-shadow: 0 0 5px var(--color-accent);
 }
+
+/* 公開ページなど、操作を伴わない場面で習熟度を表示するだけの静的版
+   （ラジオボタンを使わないため、対話操作が要らない代わりに単純なon/off） */
+.level-meter {
+  display: inline-flex;
+  gap: 3px;
+  vertical-align: middle;
+}
+
+.level-meter span {
+  width: 9px;
+  height: 14px;
+  border: 1px solid var(--color-border);
+}
+
+.level-meter span.on {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 5px var(--color-accent);
+}

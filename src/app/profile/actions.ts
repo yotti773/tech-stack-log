@@ -24,6 +24,14 @@ export async function updateProfile(
   const bio = (formData.get("bio") as string | null)?.trim() || null;
   const is_public = formData.get("is_public") === "on";
 
+  if (username && !/^[a-z0-9_-]{3,20}$/.test(username)) {
+    return {
+      status: "error",
+      message:
+        "ユーザー名は半角英小文字・数字・ハイフン・アンダースコアで3〜20文字にしてください（公開ページのURLになります）",
+    };
+  }
+
   const { error } = await supabase
     .from("profiles")
     .update({ username, display_name, bio, is_public })

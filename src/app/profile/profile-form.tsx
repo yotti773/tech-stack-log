@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useActionState } from "react";
 import { updateProfile, type ActionState } from "./actions";
 
@@ -59,8 +60,20 @@ export function ProfileForm({
 
       <label className="flex items-center gap-2 text-sm text-text">
         <input type="checkbox" name="is_public" defaultChecked={isPublic} />
-        プロフィールを公開する（今後、公開ページから見られるようになります）
+        プロフィールを公開する（
+        {username ? `/u/${username}` : "ユーザー名を設定すると専用URL"}
+        で誰でも閲覧できるようになります）
       </label>
+
+      {isPublic && username && (
+        <Link
+          href={`/u/${username}`}
+          target="_blank"
+          className="text-sm text-accent underline decoration-border underline-offset-2 hover:decoration-accent"
+        >
+          公開ページを見る →
+        </Link>
+      )}
 
       <button
         type="submit"
