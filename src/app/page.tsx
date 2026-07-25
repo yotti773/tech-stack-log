@@ -11,26 +11,26 @@ export default async function Home() {
     : null;
 
   return (
-    <div className="flex flex-1 flex-col items-center bg-zinc-50 font-sans dark:bg-black">
+    <div className="flex flex-1 flex-col items-center bg-bg">
       <main className="flex w-full max-w-xl flex-col items-center gap-6 px-8 py-32 text-center">
-        <h1 className="text-3xl font-semibold tracking-tight text-black dark:text-zinc-50">
+        <h1 className="text-3xl font-bold tracking-tight text-text">
           Tech Stack Log
         </h1>
-        <p className="text-lg leading-8 text-zinc-600 dark:text-zinc-400">
+        <p className="text-lg leading-8 text-dim">
           自分の技術スタックと習熟度を整理して公開するアプリ。
         </p>
 
         {claims ? (
           <Link
             href="/mytech"
-            className="rounded bg-black px-4 py-2 text-white dark:bg-zinc-50 dark:text-black"
+            className="rounded-md bg-accent px-4 py-2 font-semibold text-accent-fg"
           >
             マイ技術スタックを見る
           </Link>
         ) : (
           <Link
             href="/login"
-            className="rounded bg-black px-4 py-2 text-white dark:bg-zinc-50 dark:text-black"
+            className="rounded-md bg-accent px-4 py-2 font-semibold text-accent-fg"
           >
             ログインしてはじめる
           </Link>

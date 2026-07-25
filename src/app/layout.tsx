@@ -29,39 +29,43 @@ async function Header() {
     ? (await (await createClient()).auth.getClaims()).data?.claims
     : null;
 
+  const email = claims ? String(claims.email) : null;
+  const initial = email ? email[0]!.toUpperCase() : "";
+
   return (
-    <header className="flex items-center justify-between border-b border-zinc-200 bg-zinc-50 px-6 py-3 text-sm dark:border-zinc-800 dark:bg-black">
-      <div className="flex items-center gap-4">
-        <Link
-          href="/"
-          className="font-semibold text-black dark:text-zinc-50"
-        >
+    <header className="flex items-center justify-between border-b border-border bg-surface px-6 py-3 text-sm">
+      <div className="flex items-center gap-5">
+        <Link href="/" className="font-bold tracking-tight text-text">
           Tech Stack Log
         </Link>
-        <Link
-          href="/technologies"
-          className="text-zinc-600 dark:text-zinc-400"
-        >
+        <Link href="/technologies" className="text-dim hover:text-text">
           技術マスタ
         </Link>
-      </div>
-
-      <div className="flex items-center gap-4">
-        {claims ? (
+        {email && (
           <>
-            <span className="text-zinc-600 dark:text-zinc-400">
-              {String(claims.email)}
-            </span>
-            <Link href="/mytech" className="text-black dark:text-zinc-50">
+            <Link href="/mytech" className="text-dim hover:text-text">
               マイ技術スタック
             </Link>
-            <Link href="/profile" className="text-black dark:text-zinc-50">
+            <Link href="/profile" className="text-dim hover:text-text">
               プロフィール
             </Link>
+          </>
+        )}
+      </div>
+
+      <div className="flex items-center gap-3">
+        {email ? (
+          <>
+            <span className="flex items-center gap-2 text-dim">
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-accent text-xs font-bold text-accent-fg">
+                {initial}
+              </span>
+              {email}
+            </span>
             <form action={logout}>
               <button
                 type="submit"
-                className="rounded border border-zinc-300 px-2 py-1 text-black dark:border-zinc-700 dark:text-zinc-50"
+                className="rounded-md border border-border px-3 py-1.5 text-text hover:bg-bg"
               >
                 ログアウト
               </button>
@@ -70,7 +74,7 @@ async function Header() {
         ) : (
           <Link
             href="/login"
-            className="rounded bg-black px-3 py-1 text-white dark:bg-zinc-50 dark:text-black"
+            className="rounded-md bg-accent px-3 py-1.5 font-semibold text-accent-fg"
           >
             ログイン
           </Link>

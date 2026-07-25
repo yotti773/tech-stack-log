@@ -17,12 +17,12 @@ export function LoginForm({ confirmError }: { confirmError?: string }) {
           name="email"
           placeholder="you@example.com"
           required
-          className="w-full rounded border border-zinc-300 bg-white px-3 py-2 text-black dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50"
+          className="w-full rounded-md border border-border bg-surface px-3 py-2 text-text"
         />
         <button
           type="submit"
           disabled={pending}
-          className="w-full rounded bg-black px-3 py-2 text-white disabled:opacity-50 dark:bg-zinc-50 dark:text-black"
+          className="w-full rounded-md bg-accent px-3 py-2 font-semibold text-accent-fg disabled:opacity-50"
         >
           {pending ? "送信中..." : "ログインリンクを送る"}
         </button>
@@ -33,7 +33,7 @@ export function LoginForm({ confirmError }: { confirmError?: string }) {
           className={
             state.status === "error"
               ? "text-sm text-red-600"
-              : "text-sm text-green-600"
+              : "text-sm text-good"
           }
         >
           {state.message}

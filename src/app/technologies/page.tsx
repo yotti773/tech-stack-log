@@ -25,12 +25,12 @@ export default async function TechnologiesPage() {
   }
 
   return (
-    <div className="flex flex-1 flex-col items-center bg-zinc-50 font-sans dark:bg-black">
+    <div className="flex flex-1 flex-col items-center bg-bg">
       <main className="flex w-full max-w-2xl flex-col gap-8 px-8 py-16">
-        <h1 className="text-2xl font-semibold text-black dark:text-zinc-50">
+        <h1 className="text-2xl font-bold tracking-tight text-text">
           技術マスタ
         </h1>
-        <p className="text-sm text-zinc-600 dark:text-zinc-400">
+        <p className="text-sm text-dim">
           このアプリで登録できる技術の一覧です。無ければマイ技術スタックのページから追加できます。
         </p>
 
@@ -40,28 +40,26 @@ export default async function TechnologiesPage() {
 
         {[...grouped.entries()].map(([category, items]) => (
           <section key={category}>
-            <h2 className="mb-2 text-lg font-semibold text-black dark:text-zinc-50">
+            <h2 className="mb-2 text-xs font-semibold uppercase tracking-wide text-dim">
               {category}
             </h2>
-            <ul>
+            <ul className="overflow-hidden rounded-lg border border-border bg-surface">
               {items.map((tech) => (
                 <li
                   key={tech.id}
-                  className="border-b border-zinc-200 py-2 dark:border-zinc-800"
+                  className="border-b border-border px-4 py-3 text-sm last:border-b-0"
                 >
                   {tech.official_url ? (
                     <a
                       href={tech.official_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-black underline dark:text-zinc-50"
+                      className="font-medium text-text underline decoration-border underline-offset-2"
                     >
                       {tech.name}
                     </a>
                   ) : (
-                    <span className="text-black dark:text-zinc-50">
-                      {tech.name}
-                    </span>
+                    <span className="font-medium text-text">{tech.name}</span>
                   )}
                 </li>
               ))}

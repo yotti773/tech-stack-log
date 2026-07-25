@@ -15,14 +15,12 @@ export default async function MyTechPage() {
 
   if (!supabase || !claims) {
     return (
-      <div className="flex flex-1 flex-col items-center bg-zinc-50 font-sans dark:bg-black">
+      <div className="flex flex-1 flex-col items-center bg-bg">
         <main className="flex w-full max-w-xl flex-col items-center gap-4 px-8 py-32 text-center">
-          <p className="text-black dark:text-zinc-50">
-            この機能を使うにはログインが必要です。
-          </p>
+          <p className="text-text">この機能を使うにはログインが必要です。</p>
           <Link
             href="/login"
-            className="rounded bg-black px-3 py-1 text-sm text-white dark:bg-zinc-50 dark:text-black"
+            className="rounded-md bg-accent px-3 py-1.5 text-sm font-semibold text-accent-fg"
           >
             ログイン
           </Link>
@@ -61,20 +59,25 @@ export default async function MyTechPage() {
   }
 
   return (
-    <div className="flex flex-1 flex-col items-center bg-zinc-50 font-sans dark:bg-black">
+    <div className="flex flex-1 flex-col items-center bg-bg">
       <main className="flex w-full max-w-2xl flex-col gap-8 px-8 py-16">
-        <h1 className="text-2xl font-semibold text-black dark:text-zinc-50">
-          マイ技術スタック
-        </h1>
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight text-text">
+            マイ技術スタック
+          </h1>
+          <p className="mt-1 text-sm text-dim">
+            登録した技術を習熟度・カテゴリごとに管理します
+          </p>
+        </div>
 
         <AddTechForm technologies={technologies ?? []} />
 
         {[...grouped.entries()].map(([category, items]) => (
           <section key={category}>
-            <h2 className="mb-2 text-lg font-semibold text-black dark:text-zinc-50">
+            <h2 className="mb-2 text-xs font-semibold uppercase tracking-wide text-dim">
               {category}
             </h2>
-            <ul>
+            <ul className="overflow-hidden rounded-lg border border-border bg-surface">
               {items.map((item) => (
                 <TechRow
                   key={item.id}
@@ -91,9 +94,7 @@ export default async function MyTechPage() {
         ))}
 
         {grouped.size === 0 && (
-          <p className="text-zinc-600 dark:text-zinc-400">
-            まだ技術が登録されていません。
-          </p>
+          <p className="text-dim">まだ技術が登録されていません。</p>
         )}
       </main>
     </div>

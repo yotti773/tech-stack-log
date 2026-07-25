@@ -14,14 +14,12 @@ export default async function ProfilePage() {
 
   if (!supabase || !claims) {
     return (
-      <div className="flex flex-1 flex-col items-center bg-zinc-50 font-sans dark:bg-black">
+      <div className="flex flex-1 flex-col items-center bg-bg">
         <main className="flex w-full max-w-xl flex-col items-center gap-4 px-8 py-32 text-center">
-          <p className="text-black dark:text-zinc-50">
-            この機能を使うにはログインが必要です。
-          </p>
+          <p className="text-text">この機能を使うにはログインが必要です。</p>
           <Link
             href="/login"
-            className="rounded bg-black px-3 py-1 text-sm text-white dark:bg-zinc-50 dark:text-black"
+            className="rounded-md bg-accent px-3 py-1.5 text-sm font-semibold text-accent-fg"
           >
             ログイン
           </Link>
@@ -37,9 +35,9 @@ export default async function ProfilePage() {
     .single();
 
   return (
-    <div className="flex flex-1 flex-col items-center bg-zinc-50 font-sans dark:bg-black">
+    <div className="flex flex-1 flex-col items-center bg-bg">
       <main className="flex w-full max-w-lg flex-col gap-8 px-8 py-16">
-        <h1 className="text-2xl font-semibold text-black dark:text-zinc-50">
+        <h1 className="text-2xl font-bold tracking-tight text-text">
           プロフィール編集
         </h1>
         <ProfileForm
