@@ -85,6 +85,54 @@ export type Database = {
         }
         Relationships: []
       }
+      user_technologies: {
+        Row: {
+          created_at: string
+          id: string
+          is_public: boolean
+          level: number
+          note: string | null
+          profile_id: string
+          technology_id: string
+          years: number | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_public?: boolean
+          level: number
+          note?: string | null
+          profile_id: string
+          technology_id: string
+          years?: number | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_public?: boolean
+          level?: number
+          note?: string | null
+          profile_id?: string
+          technology_id?: string
+          years?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_technologies_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "user_technologies_technology_id_fkey"
+            columns: ["technology_id"]
+            isOneToOne: false
+            referencedRelation: "technologies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
