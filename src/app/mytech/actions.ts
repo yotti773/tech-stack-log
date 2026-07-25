@@ -53,9 +53,10 @@ export async function addUserTechnology(
     if (existing) {
       technology_id = existing.id;
     } else {
+      const category = (formData.get("category") as string | null)?.trim() || null;
       const { data: created, error: createError } = await supabase
         .from("technologies")
-        .insert({ name: newName })
+        .insert({ name: newName, category })
         .select("id")
         .single();
 

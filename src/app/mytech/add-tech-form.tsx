@@ -8,8 +8,10 @@ const initialState: ActionState = { status: "idle" };
 
 export function AddTechForm({
   technologies,
+  categories,
 }: {
   technologies: { id: string; name: string }[];
+  categories: string[];
 }) {
   const [state, formAction, pending] = useActionState(
     addUserTechnology,
@@ -42,17 +44,37 @@ export function AddTechForm({
       </div>
 
       {!selected && (
-        <div className="flex flex-col gap-1 text-sm text-text">
-          <span className="text-xs uppercase tracking-wide text-dim">
-            新しい技術名
-          </span>
-          <input
-            type="text"
-            name="new_technology_name"
-            placeholder="例: Rust"
-            className="border border-border bg-bg px-2 py-1.5 text-text"
-          />
-        </div>
+        <>
+          <div className="flex flex-col gap-1 text-sm text-text">
+            <span className="text-xs uppercase tracking-wide text-dim">
+              新しい技術名
+            </span>
+            <input
+              type="text"
+              name="new_technology_name"
+              placeholder="例: Rust"
+              className="border border-border bg-bg px-2 py-1.5 text-text"
+            />
+          </div>
+
+          <div className="flex flex-col gap-1 text-sm text-text">
+            <span className="text-xs uppercase tracking-wide text-dim">
+              カテゴリ
+            </span>
+            <input
+              type="text"
+              name="category"
+              list="category-options"
+              placeholder="例: Language"
+              className="w-40 border border-border bg-bg px-2 py-1.5 text-text"
+            />
+            <datalist id="category-options">
+              {categories.map((category) => (
+                <option key={category} value={category} />
+              ))}
+            </datalist>
+          </div>
+        </>
       )}
 
       <div className="flex flex-col gap-1 text-sm text-text">

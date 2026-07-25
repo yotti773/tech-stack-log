@@ -31,8 +31,12 @@ export default async function MyTechPage() {
       .from("user_technologies")
       .select("id, level, years, note, is_public, technologies(id, name, category)")
       .eq("profile_id", claims.sub as string),
-    supabase.from("technologies").select("id, name").order("name"),
+    supabase.from("technologies").select("id, name, category").order("name"),
   ]);
+
+  const categories = [
+    ...new Set((technologies ?? []).map((t) => t.category).filter((c): c is string => !!c)),
+  ].sort();
 
   const grouped = new Map<
     string,
@@ -67,7 +71,7 @@ export default async function MyTechPage() {
           </p>
         </div>
 
-        <AddTechForm technologies={technologies ?? []} />
+        <AddTechForm technologies={technologies ?? []} categories={categories} />
 
         {[...grouped.entries()].map(([category, items]) => (
           <section key={category}>
