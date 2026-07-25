@@ -63,17 +63,9 @@ export default async function MyTechPage() {
   return (
     <div className="flex flex-1 flex-col items-center bg-zinc-50 font-sans dark:bg-black">
       <main className="flex w-full max-w-2xl flex-col gap-8 px-8 py-16">
-        <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-semibold text-black dark:text-zinc-50">
-            マイ技術スタック
-          </h1>
-          <Link
-            href="/"
-            className="text-sm text-zinc-600 underline dark:text-zinc-400"
-          >
-            トップへ戻る
-          </Link>
-        </div>
+        <h1 className="text-2xl font-semibold text-black dark:text-zinc-50">
+          マイ技術スタック
+        </h1>
 
         <AddTechForm technologies={technologies ?? []} />
 
