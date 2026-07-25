@@ -419,3 +419,17 @@ enabled = true
 # declarative_schema_path = "./database"
 # JSON string passed through to pg-delta SQL formatting.
 # format_options = "{\"keywordCase\":\"upper\",\"indent\":2,\"maxWidth\":80,\"commaStyle\":\"trailing\"}"
+
+# GitHubログイン。ローカルでも実際の github.com へリダイレクトするため、往復を
+# 通すには本物のOAuth Appの値が要る（.env に置く。ダミーのままでも Supabase は
+# 起動し、パスワード認証やリダイレクト直前までの確認はできる）。
+# 本番はダッシュボードの Authentication > Sign In / Providers > GitHub に、
+# GitHub側で作成したOAuth Appの Client ID / Secret を入れる。
+# GitHub OAuth App の Authorization callback URL は、アプリの /auth/callback では
+# なく Supabase 側のURL:
+#   ローカル: http://localhost:54321/auth/v1/callback
+#   本番:     https://<project-ref>.supabase.co/auth/v1/callback
+[auth.external.github]
+enabled = true
+client_id = "env(SUPABASE_AUTH_EXTERNAL_GITHUB_CLIENT_ID)"
+secret = "env(SUPABASE_AUTH_EXTERNAL_GITHUB_SECRET)"

@@ -14,7 +14,7 @@ export default async function LoginPage({
           ログイン
         </h1>
         <p className="text-center text-sm text-dim">
-          メールアドレス宛にログインリンクを送ります。
+          GitHubアカウント、またはメールアドレスとパスワードでログインします。
         </p>
 
         <LoginForm confirmError={error} />

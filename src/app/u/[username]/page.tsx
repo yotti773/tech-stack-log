@@ -61,11 +61,19 @@ export default async function PublicProfilePage({
   }
 
   const supabase = createPublicClient();
-  const { data: rows } = await supabase
-    .from("user_technologies")
-    .select("level, years, note, technologies(name, category)")
-    .eq("profile_id", profile.id)
-    .eq("is_public", true);
+  const [{ data: rows }, { data: careers }] = await Promise.all([
+    supabase
+      .from("user_technologies")
+      .select("level, years, note, technologies(name, category)")
+      .eq("profile_id", profile.id)
+      .eq("is_public", true),
+    supabase
+      .from("careers")
+      .select("id, company, role, started_on, ended_on, summary, career_technologies(technologies(name))")
+      .eq("profile_id", profile.id)
+      .eq("is_public", true)
+      .order("started_on", { ascending: false }),
+  ]);
 
   const grouped = new Map<
     string,
@@ -122,6 +130,39 @@ export default async function PublicProfilePage({
 
         {grouped.size === 0 && (
           <p className="text-dim">まだ公開されている技術はありません。</p>
+        )}
+
+        {(careers ?? []).length > 0 && (
+          <section>
+            <h2 className="mb-2 text-xs uppercase tracking-wide text-dim before:content-['//_']">
+              略歴
+            </h2>
+            <ul className="overflow-hidden border border-border bg-surface">
+              {(careers ?? []).map((career) => (
+                <li
+                  key={career.id}
+                  className="flex flex-col gap-1 border-b border-border px-4 py-3 text-sm last:border-b-0"
+                >
+                  <div className="flex flex-wrap items-baseline gap-x-3">
+                    <span className="font-semibold text-accent">{career.company}</span>
+                    <span className="text-text">{career.role}</span>
+                    <span className="text-xs text-dim">
+                      {career.started_on} 〜 {career.ended_on ?? "現在"}
+                    </span>
+                  </div>
+                  {career.summary && <p className="text-dim">{career.summary}</p>}
+                  {career.career_technologies.length > 0 && (
+                    <p className="text-xs text-dim">
+                      {career.career_technologies
+                        .map((ct) => ct.technologies?.name)
+                        .filter(Boolean)
+                        .join(" / ")}
+                    </p>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </section>
         )}
       </main>
     </div>

@@ -1,7 +1,36 @@
-<h2>ログインリンク</h2>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#061912" style="background-color:#061912;margin:0;padding:32px 0;">
+  <tr>
+    <td align="center" style="padding:0 16px;">
 
-<p>以下のリンクをクリックしてログインしてください。</p>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:480px;background-color:#0a2117;border:1px solid #1f4a35;">
+        <tr>
+          <td style="padding:28px 28px 24px;font-family:'IBM Plex Mono',Consolas,Monaco,'Courier New',monospace;font-size:14px;line-height:1.7;color:#5ffa9d;">
 
-<p><a href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=email&next=/">ログインする</a></p>
+            <p style="margin:0 0 24px;font-size:15px;letter-spacing:0.08em;color:#5f8973;">Tech&nbsp;Stack&nbsp;Log_</p>
 
-<p>心当たりがない場合は、このメールを無視してください。</p>
+            <p style="margin:0 0 8px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5f8973;">// ログインリンク</p>
+
+            <p style="margin:0 0 24px;color:#5ffa9d;">下のボタンを押すとログインが完了します。</p>
+
+            <p style="margin:0 0 24px;">
+              <a href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=email&next=/"
+                 style="display:inline-block;padding:11px 22px;border:1px solid #5ffa9d;color:#baffdb;font-family:'IBM Plex Mono',Consolas,Monaco,'Courier New',monospace;font-size:14px;font-weight:600;letter-spacing:0.04em;text-decoration:none;">ログインする</a>
+            </p>
+
+            <p style="margin:0 0 6px;font-size:12px;color:#5f8973;">ボタンが使えない場合は、次のURLをブラウザに貼り付けてください。</p>
+            <p style="margin:0 0 24px;font-size:12px;line-height:1.6;color:#5f8973;word-break:break-all;">{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=email&next=/</p>
+
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 18px;">
+              <tr><td style="height:1px;background-color:#1f4a35;line-height:1px;font-size:0;">&nbsp;</td></tr>
+            </table>
+
+            <p style="margin:0 0 6px;font-size:12px;color:#5f8973;">このリンクは発行から1時間で無効になります。</p>
+            <p style="margin:0;font-size:12px;color:#5f8973;">心当たりがない場合は、このメールを破棄してください。リンクを踏まないかぎり何も起きません。</p>
+
+          </td>
+        </tr>
+      </table>
+
+    </td>
+  </tr>
+</table>

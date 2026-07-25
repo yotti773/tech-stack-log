@@ -34,6 +34,80 @@ export type Database = {
   }
   public: {
     Tables: {
+      career_technologies: {
+        Row: {
+          career_id: string
+          technology_id: string
+        }
+        Insert: {
+          career_id: string
+          technology_id: string
+        }
+        Update: {
+          career_id?: string
+          technology_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "career_technologies_career_id_fkey"
+            columns: ["career_id"]
+            isOneToOne: false
+            referencedRelation: "careers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "career_technologies_technology_id_fkey"
+            columns: ["technology_id"]
+            isOneToOne: false
+            referencedRelation: "technologies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      careers: {
+        Row: {
+          company: string
+          created_at: string
+          ended_on: string | null
+          id: string
+          is_public: boolean
+          profile_id: string
+          role: string
+          started_on: string
+          summary: string | null
+        }
+        Insert: {
+          company: string
+          created_at?: string
+          ended_on?: string | null
+          id?: string
+          is_public?: boolean
+          profile_id: string
+          role: string
+          started_on: string
+          summary?: string | null
+        }
+        Update: {
+          company?: string
+          created_at?: string
+          ended_on?: string | null
+          id?: string
+          is_public?: boolean
+          profile_id?: string
+          role?: string
+          started_on?: string
+          summary?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "careers_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           bio: string | null

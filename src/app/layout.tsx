@@ -48,6 +48,9 @@ async function Header() {
             <Link href="/mytech" className="text-dim hover:text-accent">
               マイ技術スタック
             </Link>
+            <Link href="/career" className="text-dim hover:text-accent">
+              略歴
+            </Link>
             <Link href="/profile" className="text-dim hover:text-accent">
               プロフィール
             </Link>
