@@ -1,11 +1,13 @@
 import { createServerClient } from "@/lib/supabase/server";
 
 export default async function Home() {
-  const supabase = createServerClient();
-  const { data: technologies, error } = await supabase
-    .from("technologies")
-    .select("*")
-    .order("name");
+  const supabaseConfigured =
+    !!process.env.NEXT_PUBLIC_SUPABASE_URL &&
+    !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  const { data: technologies, error } = supabaseConfigured
+    ? await createServerClient().from("technologies").select("*").order("name")
+    : { data: null, error: null };
 
   return (
     <div className="flex flex-1 flex-col items-center bg-zinc-50 font-sans dark:bg-black">
