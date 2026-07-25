@@ -1,4 +1,5 @@
 import { LoginForm } from "./login-form";
+import { PASSWORD_LOGIN_ENABLED } from "./config";
 
 export default async function LoginPage({
   searchParams,
@@ -14,7 +15,9 @@ export default async function LoginPage({
           ログイン
         </h1>
         <p className="text-center text-sm text-dim">
-          GitHubアカウント、またはメールアドレスとパスワードでログインします。
+          {PASSWORD_LOGIN_ENABLED
+            ? "GitHubアカウント、またはメールアドレスとパスワードでログインします。"
+            : "GitHubアカウントでログインします。"}
         </p>
 
         <LoginForm confirmError={error} />
