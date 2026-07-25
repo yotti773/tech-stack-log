@@ -30,6 +30,12 @@ export default async function Home() {
             <span className="text-zinc-700 dark:text-zinc-300">
               ログイン中: {String(claims.email)}
             </span>
+            <Link
+              href="/mytech"
+              className="rounded border border-zinc-300 px-3 py-1 text-black dark:border-zinc-700 dark:text-zinc-50"
+            >
+              マイ技術スタック
+            </Link>
             <form action={logout}>
               <button
                 type="submit"
